@@ -1,20 +1,12 @@
-import { createStore,applyMiddleware } from "redux";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
+import React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
 
-const reducer = (state = {}, action) => {
-  return state
-}
+import Layout from "./components/Layout"
+import store from "./store"
 
+const app = document.getElementById('app')
 
-const middleware = applyMiddleware(thunk,logger());
-const store = createStore(reducer,1, middleware);
-
-store.subscribe(() => {
-  console.log("store changed", store.getState())
-})
-
-store.dispatch((dispatch) => {
-  dispatch({type:"FOO"})
-  dispatch({type:"BAR"})
-})
+ReactDOM.render(<Provider store={store}>
+    <Layout />
+  </Provider>, app);
